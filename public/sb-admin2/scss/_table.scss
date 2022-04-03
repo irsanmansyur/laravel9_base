@@ -1,0 +1,21 @@
+.borderless {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
+
+.borderless td,
+.borderless th {
+    border: none;
+    padding: 2px;
+    padding-top: 10px;
+    margin: 0px;
+    border-bottom: 1px solid #eee;
+
+}
+
+.borderless tr:last-child td,
+.borderless tr:last-child th {
+    border-bottom: none
+}
