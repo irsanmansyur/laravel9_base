@@ -1,3 +1,5 @@
+@props(["header_title" => config("app.name")])
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +11,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ $page_title ?? config("app.name")}}</title>
+    <title>{{ $title ?? config("app.name")}}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sb-admin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="preload" as="font" href="{{ asset('sb-admin2\assets\fonts\metropolis\Metropolis-Bold.otf') }}" type="font/otf" crossorigin="anonymous">
     <!-- Custom styles for this template-->
     <link href="{{asset('sb-admin2/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('sb-admin2/css/sb-admin.pro.css')}}" rel="stylesheet">
     @stack('styles')
 </head>
 
@@ -79,12 +83,12 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user()->name}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user('name')}}</span>
                                 <img class="img-profile rounded-circle" src="{{user()->takeThumbnail}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{route('user.profile')}}">
+                                <a class="dropdown-item" href="{{ route('user.profile') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -108,13 +112,14 @@
 
                 </nav>
                 <!-- End of Topbar -->
+
                 <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                     <div class="container-fluid">
                         <div class="page-header-content">
                             <div class="row align-items-center justify-content-between pt-3">
                                 <div class="col-auto mb-3">
                                     <h1 class="page-header-title">
-                                        {{$header ??  config('app.name')}}
+                                        {{$header_title ??  config('app.name')}}
                                     </h1>
                                 </div>
                                 <div class="col-auto mb-3">
@@ -127,7 +132,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid" style="color: #0f1415 ;">
                     <!-- Page Heading -->
-                    <x-sbadmin.alert />
+                    <x-alert />
                     {{$slot}}
                 </div>
 
@@ -187,7 +192,20 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('sb-admin2/js/sb-admin-2.min.js')}}"></script>
-
+    <script src="{{asset('sb-admin2/vendor/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script>
+        $(".btn-delete").click(function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            Swal.fire({
+                title: 'Kamu yakin akan menghapus?',
+                showCancelButton: true,
+                confirmButtonText: 'Yakin',
+            }).then((result) => {
+                if (result.isConfirmed) return $(this).closest("form").submit()
+            })
+        });
+    </script>
     @stack('scripts')
 
 </body>
