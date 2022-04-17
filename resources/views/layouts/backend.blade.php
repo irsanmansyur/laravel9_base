@@ -78,9 +78,9 @@
 
                         <li class="nav-item dropdown no-arrow mx-1">
                             <span class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="btn btn-sm btn-outline-primary">
-                                    <div class="border-b" id="time"></div>
-                                    <div style="font-size: 8px;">
+                                <div class="btn btn-sm btn-outline-primary" style="padding-top: 3px;padding-bottom: 3px">
+                                    <div class="border-b" style="padding: 0;margin-top:-5px" id="time"></div>
+                                    <div style="font-size: 8px;padding: 0;margin-top:-5px">
                                         {{ now()->isoFormat('dddd, D MMMM Y') }}
                                     </div>
                                 </div>
