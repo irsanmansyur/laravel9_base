@@ -14,6 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        if ($this->command->confirm('Do you wish to refresh migration before seeding, it will clear all old data ?')) {
+            // Call the php artisan migrate:refresh
+            $this->command->call('migrate:refresh');
+            $this->command->warn("Data cleared, starting from blank database.");
+        }
+
+        $this->command->info('Default Settings added.');
+        $this->call(UserSeeder::class);
     }
 }

@@ -15,10 +15,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sb-admin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link rel="preload" as="font" href="{{ asset('sb-admin2\assets\fonts\metropolis\Metropolis-Bold.otf') }}" type="font/otf" crossorigin="anonymous">
     <!-- Custom styles for this template-->
     <link href="{{asset('sb-admin2/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('sb-admin2/css/sb-admin.pro.css')}}" rel="stylesheet">
     @stack('styles')
 </head>
 
@@ -57,6 +55,16 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <span class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="btn btn-sm btn-outline-primary">
+                                    <div class="border-b" id="time"></div>
+                                    <div style="font-size: 8px;">
+                                        {{ now()->isoFormat('dddd, D MMMM Y') }}
+                                    </div>
+                                </div>
+                            </span>
+                        </li>
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -205,6 +213,23 @@
                 if (result.isConfirmed) return $(this).closest("form").submit()
             })
         });
+        (function() {
+            function checkTime(i) {
+                return (i < 10) ? "0" + i : i;
+            }
+
+            function startTime() {
+                var today = new Date(),
+                    h = checkTime(today.getHours()),
+                    m = checkTime(today.getMinutes()),
+                    s = checkTime(today.getSeconds());
+                document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+                t = setTimeout(function() {
+                    startTime()
+                }, 500);
+            }
+            startTime();
+        })();
     </script>
     @stack('scripts')
 
