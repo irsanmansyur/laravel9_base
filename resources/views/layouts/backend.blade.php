@@ -55,16 +55,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <span class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="btn btn-sm btn-outline-primary">
-                                    <div class="border-b" id="time"></div>
-                                    <div style="font-size: 8px;">
-                                        {{ now()->isoFormat('dddd, D MMMM Y') }}
-                                    </div>
-                                </div>
-                            </span>
-                        </li>
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -86,7 +76,16 @@
                             </div>
                         </li>
 
-
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <span class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="btn btn-sm btn-outline-primary">
+                                    <div class="border-b" id="time"></div>
+                                    <div style="font-size: 8px;">
+                                        {{ now()->isoFormat('dddd, D MMMM Y') }}
+                                    </div>
+                                </div>
+                            </span>
+                        </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -153,7 +152,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; {{ config('app.name') }} {{ config('app.sejak') }}</span>
                     </div>
                 </div>
             </footer>
