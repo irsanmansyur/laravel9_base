@@ -22,6 +22,11 @@ mix.js("resources/js/app.js", "public/js")
     .alias({
         "@": "resources/js",
     });
+mix.postCss("resources/css/errors.css", "public/css", [
+    require("postcss-import"),
+    require("tailwindcss"),
+    require("autoprefixer"),
+]);
 
 if (mix.inProduction()) {
     mix.version();
