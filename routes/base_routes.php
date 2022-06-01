@@ -5,6 +5,9 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SecurityController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/error', function () {
+    return abort(403, "Maaf Terjadi kesalahan");
+});
 Route::middleware("auth")->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, "index"])->name('dashboard.admin');
 

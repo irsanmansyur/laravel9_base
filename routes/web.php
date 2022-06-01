@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BaseDashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,9 +25,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [BaseDashboardController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/base_routes.php';
